@@ -1,0 +1,522 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Shelter &amp; Housing — Kéré Alliance Foundation</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --green: #22a63a;
+    --green-dark: #166b28;
+    --green-light: #e8f7eb;
+    --green-mid: #4dc162;
+    --cream: #faf8f3;
+    --warm: #f5f0e8;
+    --text: #1a2a1c;
+    --text-mid: #3d5c41;
+    --text-light: #6a8c6e;
+    --gold: #c9a84c;
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'Outfit', sans-serif;
+    background: var(--cream);
+    color: var(--text);
+    overflow-x: hidden;
+  }
+
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 1.2rem 4rem;
+    background: rgba(250,248,243,0.92);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid rgba(34,166,58,0.12);
+    transition: all 0.3s;
+  }
+  .nav-logo { display: flex; align-items: center; gap: 0.8rem; text-decoration: none; }
+  .nav-logo img { height: 42px; }
+  .nav-logo span {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.2rem; font-weight: 600;
+    color: var(--green-dark); letter-spacing: 0.02em;
+  }
+  .nav-links { display: flex; align-items: center; gap: 2.5rem; list-style: none; }
+  .nav-links a {
+    text-decoration: none; font-size: 0.875rem; font-weight: 400;
+    color: var(--text-mid); letter-spacing: 0.04em; text-transform: uppercase;
+    transition: color 0.2s;
+  }
+  .nav-links a:hover { color: var(--green); }
+  .nav-cta {
+    background: var(--green); color: white !important;
+    padding: 0.55rem 1.4rem; border-radius: 50px;
+    font-weight: 500 !important; transition: background 0.2s, transform 0.2s !important;
+  }
+  .nav-cta:hover { background: var(--green-dark) !important; transform: translateY(-1px); }
+
+  .btn-primary {
+    background: var(--green); color: white;
+    padding: 0.9rem 2.2rem; border-radius: 50px; border: none;
+    font-family: 'Outfit', sans-serif; font-size: 0.9rem; font-weight: 500;
+    cursor: pointer; text-decoration: none;
+    display: inline-flex; align-items: center; gap: 0.5rem;
+    transition: all 0.25s; box-shadow: 0 4px 20px rgba(34,166,58,0.3);
+  }
+  .btn-primary:hover { background: var(--green-dark); transform: translateY(-2px); box-shadow: 0 8px 30px rgba(34,166,58,0.4); }
+  .btn-secondary {
+    background: transparent; color: var(--green-dark);
+    padding: 0.9rem 2.2rem; border-radius: 50px; border: 2px solid var(--green);
+    font-family: 'Outfit', sans-serif; font-size: 0.9rem; font-weight: 500;
+    cursor: pointer; text-decoration: none;
+    display: inline-flex; align-items: center; gap: 0.5rem;
+    transition: all 0.25s;
+  }
+  .btn-secondary:hover { background: var(--green-light); transform: translateY(-2px); }
+
+  .page-hero {
+    min-height: 52vh; display: flex; align-items: center;
+    padding: 10rem 5rem 6rem; position: relative; overflow: hidden;
+  }
+  .page-hero-bg {
+    position: absolute; inset: 0;
+    background: radial-gradient(ellipse 70% 80% at 80% 50%, rgba(34,166,58,0.08) 0%, transparent 70%),
+                radial-gradient(ellipse 40% 40% at 10% 80%, rgba(34,166,58,0.05) 0%, transparent 60%);
+  }
+  .page-hero-bg::before {
+    content: ''; position: absolute; right: -80px; top: 10%;
+    width: 500px; height: 500px;
+    background: radial-gradient(ellipse, rgba(34,166,58,0.1), transparent 70%);
+    border-radius: 60% 40% 70% 30% / 50% 60% 40% 50%;
+    animation: morphBlob 8s ease-in-out infinite;
+  }
+  @keyframes morphBlob {
+    0%, 100% { border-radius: 60% 40% 70% 30% / 50% 60% 40% 50%; }
+    33% { border-radius: 40% 60% 30% 70% / 60% 40% 60% 40%; }
+    66% { border-radius: 70% 30% 50% 50% / 30% 70% 40% 60%; }
+  }
+  .page-hero-content { position: relative; z-index: 1; max-width: 700px; animation: fadeUp 0.9s ease both; }
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(30px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  .hero-tag {
+    display: inline-flex; align-items: center; gap: 0.5rem;
+    background: var(--green-light); color: var(--green-dark);
+    font-size: 0.75rem; font-weight: 500; letter-spacing: 0.1em; text-transform: uppercase;
+    padding: 0.4rem 1rem; border-radius: 50px; margin-bottom: 1.8rem;
+  }
+  .hero-tag::before { content: '✦'; font-size: 0.6rem; color: var(--green); }
+  .page-hero h1 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(2.8rem, 5vw, 4.2rem); font-weight: 300; line-height: 1.1;
+    color: var(--text); margin-bottom: 1.5rem;
+  }
+  .page-hero h1 em { font-style: italic; color: var(--green); font-weight: 400; }
+  .hero-verse {
+    font-family: 'Cormorant Garamond', serif; font-style: italic; font-size: 1.05rem;
+    color: var(--text-light); border-left: 3px solid var(--green); padding-left: 1.2rem;
+    margin-bottom: 2.2rem; line-height: 1.6;
+  }
+  .hero-verse span { display: block; font-style: normal; font-size: 0.8rem; margin-top: 0.3rem; color: var(--gold); font-family: 'Outfit', sans-serif; letter-spacing: 0.05em; }
+  .hero-btns { display: flex; gap: 1rem; flex-wrap: wrap; }
+
+  section { padding: 7rem 5rem; }
+  .section-tag {
+    display: inline-flex; align-items: center; gap: 0.5rem;
+    color: var(--green); font-size: 0.75rem; font-weight: 500;
+    letter-spacing: 0.12em; text-transform: uppercase; margin-bottom: 1rem;
+  }
+  .section-tag::before { content: ''; display: block; width: 24px; height: 2px; background: var(--green); }
+  h2.section-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(2.2rem, 4vw, 3.2rem); font-weight: 300; line-height: 1.2;
+    color: var(--text); margin-bottom: 1.5rem;
+  }
+  h2.section-title em { font-style: italic; color: var(--green); }
+
+  .projects { background: var(--cream); }
+  .projects-header { text-align: center; max-width: 640px; margin: 0 auto 4rem; }
+  .projects-header p { font-size: 0.95rem; color: var(--text-light); line-height: 1.8; }
+  .projects-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1.8rem; }
+
+  .program-card {
+    background: white; border-radius: 20px; padding: 2rem;
+    transition: all 0.3s; position: relative; overflow: hidden;
+    border: 1px solid rgba(34,166,58,0.1);
+    display: flex; flex-direction: column;
+  }
+  .program-card::before {
+    content: ''; position: absolute; top: 0; left: 0; right: 0; height: 4px;
+    background: var(--green); transform: scaleX(0); transform-origin: left; transition: transform 0.3s;
+  }
+  .program-card:hover::before { transform: scaleX(1); }
+  .program-card:hover { transform: translateY(-6px); box-shadow: 0 16px 40px rgba(34,166,58,0.15); }
+  .program-emoji { font-size: 2rem; margin-bottom: 1rem; }
+  .program-card h3 {
+    font-family: 'Cormorant Garamond', serif; font-size: 1.4rem; font-weight: 600;
+    color: var(--text); margin-bottom: 0.8rem;
+  }
+  .program-card p { font-size: 0.875rem; color: var(--text-light); line-height: 1.7; margin-bottom: 1rem; }
+  .program-items { list-style: none; margin-bottom: 1.5rem; flex: 1; }
+  .program-items li {
+    font-size: 0.8rem; color: var(--text-mid);
+    padding: 0.3rem 0; padding-left: 1rem; position: relative;
+  }
+  .program-items li::before { content: '→'; position: absolute; left: 0; color: var(--green); font-size: 0.75rem; }
+  .card-donate-btn {
+    background: var(--green); color: white;
+    padding: 0.75rem 1.5rem; border-radius: 50px; border: none;
+    font-family: 'Outfit', sans-serif; font-size: 0.85rem; font-weight: 500;
+    cursor: pointer; width: 100%; margin-top: auto;
+    transition: all 0.25s; box-shadow: 0 4px 16px rgba(34,166,58,0.25);
+    display: flex; align-items: center; justify-content: center; gap: 0.5rem;
+  }
+  .card-donate-btn:hover { background: var(--green-dark); transform: translateY(-2px); box-shadow: 0 8px 24px rgba(34,166,58,0.35); }
+
+  .mission-banner {
+    background: var(--green-dark); padding: 6rem 5rem; text-align: center; position: relative; overflow: hidden;
+  }
+  .mission-banner::before {
+    content: '"'; position: absolute; top: -2rem; left: 3rem;
+    font-family: 'Cormorant Garamond', serif; font-size: 20rem; font-weight: 600;
+    color: rgba(255,255,255,0.04); line-height: 1;
+  }
+  .mission-banner blockquote {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(1.6rem, 3vw, 2.4rem); font-weight: 300; font-style: italic;
+    color: white; line-height: 1.5; max-width: 800px; margin: 0 auto 1.5rem; position: relative; z-index: 1;
+  }
+  .mission-banner blockquote em { color: var(--green-mid); font-style: normal; font-weight: 400; }
+  .mission-banner cite {
+    font-family: 'Outfit', sans-serif; font-size: 0.85rem; font-style: normal;
+    color: rgba(255,255,255,0.5); letter-spacing: 0.1em; text-transform: uppercase; display: block;
+  }
+
+  .impact { background: white; }
+  .impact-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2rem; margin-top: 3rem; }
+  .impact-card { background: var(--green-light); border-radius: 16px; padding: 2rem; text-align: center; transition: all 0.25s; }
+  .impact-card:hover { transform: translateY(-4px); box-shadow: 0 12px 32px rgba(34,166,58,0.15); }
+  .impact-num { font-family: 'Cormorant Garamond', serif; font-size: 3rem; font-weight: 600; color: var(--green-dark); line-height: 1; margin-bottom: 0.5rem; }
+  .impact-num span { color: var(--green); }
+  .impact-label { font-size: 0.85rem; color: var(--text-mid); font-weight: 500; }
+
+  footer {
+    background: #0f1a10; padding: 2.5rem 5rem;
+    display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 1rem;
+  }
+  .footer-logo { display: flex; align-items: center; gap: 0.8rem; }
+  .footer-logo img { height: 32px; }
+  .footer-logo span { font-family: 'Cormorant Garamond', serif; font-size: 1rem; color: rgba(255,255,255,0.7); }
+  .footer-motto { font-size: 0.8rem; color: rgba(255,255,255,0.35); font-style: italic; font-family: 'Cormorant Garamond', serif; text-align: center; }
+  .footer-copy { font-size: 0.75rem; color: rgba(255,255,255,0.3); text-align: right; }
+
+  .reveal { opacity: 0; transform: translateY(24px); transition: opacity 0.7s ease, transform 0.7s ease; }
+  .reveal.visible { opacity: 1; transform: none; }
+  .reveal-delay-1 { transition-delay: 0.1s; }
+  .reveal-delay-2 { transition-delay: 0.2s; }
+
+  .modal-overlay {
+    position: fixed; inset: 0; z-index: 1000;
+    background: rgba(10,20,10,0.6); backdrop-filter: blur(4px);
+    display: flex; align-items: center; justify-content: center;
+    opacity: 0; pointer-events: none; transition: opacity 0.3s;
+  }
+  .modal-overlay.open { opacity: 1; pointer-events: all; }
+  .modal {
+    background: white; border-radius: 24px; padding: 2.5rem;
+    width: min(480px, 92vw); max-height: 90vh; overflow-y: auto;
+    transform: translateY(20px); transition: transform 0.3s;
+    box-shadow: 0 24px 60px rgba(0,0,0,0.2);
+  }
+  .modal-overlay.open .modal { transform: translateY(0); }
+  .modal-header { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 1.5rem; }
+  .modal-title { font-family: 'Cormorant Garamond', serif; font-size: 1.6rem; font-weight: 600; color: var(--text); }
+  .modal-subtitle { font-size: 0.8rem; color: var(--text-light); margin-top: 0.2rem; }
+  .modal-close {
+    background: var(--green-light); border: none; border-radius: 50%;
+    width: 32px; height: 32px; cursor: pointer; font-size: 1rem; color: var(--green-dark);
+    display: flex; align-items: center; justify-content: center; flex-shrink: 0; transition: background 0.2s;
+  }
+  .modal-close:hover { background: rgba(34,166,58,0.2); }
+  .raised-bar { background: var(--green-light); border-radius: 12px; padding: 1rem 1.2rem; margin-bottom: 1.5rem; }
+  .raised-label { font-size: 0.75rem; color: var(--text-light); text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 0.4rem; }
+  .raised-track { background: rgba(34,166,58,0.15); border-radius: 50px; height: 6px; overflow: hidden; }
+  .raised-fill { background: var(--green); height: 100%; border-radius: 50px; width: 34%; }
+  .raised-num { font-family: 'Cormorant Garamond', serif; font-size: 1.4rem; font-weight: 600; color: var(--green-dark); margin-top: 0.5rem; }
+  .raised-num span { font-size: 0.8rem; color: var(--text-light); font-family: 'Outfit', sans-serif; font-weight: 400; }
+  .amount-label { font-size: 0.8rem; font-weight: 500; color: var(--text-mid); margin-bottom: 0.6rem; text-transform: uppercase; letter-spacing: 0.06em; }
+  .amount-presets { display: grid; grid-template-columns: repeat(3, 1fr); gap: 0.6rem; margin-bottom: 0.8rem; }
+  .preset {
+    padding: 0.65rem; border-radius: 10px; border: 2px solid rgba(34,166,58,0.2);
+    background: white; font-family: 'Outfit', sans-serif; font-size: 0.9rem; font-weight: 500;
+    cursor: pointer; color: var(--text-mid); transition: all 0.2s;
+  }
+  .preset:hover, .preset.active { border-color: var(--green); background: var(--green-light); color: var(--green-dark); }
+  .custom-input {
+    width: 100%; padding: 0.75rem 1rem; border-radius: 10px;
+    border: 2px solid rgba(34,166,58,0.2); background: white;
+    font-family: 'Outfit', sans-serif; font-size: 0.95rem; color: var(--text);
+    outline: none; margin-bottom: 1.2rem; transition: border-color 0.2s;
+  }
+  .custom-input:focus { border-color: var(--green); }
+  .donor-fields { display: grid; grid-template-columns: 1fr 1fr; gap: 0.6rem; margin-bottom: 0.8rem; }
+  .donor-field {
+    padding: 0.75rem 1rem; border-radius: 10px;
+    border: 2px solid rgba(34,166,58,0.2); background: white;
+    font-family: 'Outfit', sans-serif; font-size: 0.85rem; color: var(--text);
+    outline: none; transition: border-color 0.2s; width: 100%;
+  }
+  .donor-field:focus { border-color: var(--green); }
+  .anon-row { display: flex; align-items: center; gap: 0.5rem; margin-bottom: 1.2rem; cursor: pointer; }
+  .anon-row input { accent-color: var(--green); width: 15px; height: 15px; cursor: pointer; }
+  .anon-row span { font-size: 0.8rem; color: var(--text-mid); }
+  .modal-donate-btn {
+    width: 100%; padding: 1rem; border-radius: 50px; border: none;
+    background: var(--green); color: white;
+    font-family: 'Outfit', sans-serif; font-size: 0.95rem; font-weight: 500;
+    cursor: pointer; transition: all 0.25s; box-shadow: 0 4px 20px rgba(34,166,58,0.3);
+  }
+  .modal-donate-btn:hover { background: var(--green-dark); transform: translateY(-1px); }
+  .secure-note { text-align: center; font-size: 0.75rem; color: var(--text-light); margin-top: 0.8rem; }
+
+  @media (max-width: 900px) {
+    nav { padding: 1rem 1.5rem; }
+    .nav-links { display: none; }
+    .page-hero { padding: 8rem 1.5rem 4rem; }
+    section { padding: 4rem 1.5rem; }
+    .projects-grid { grid-template-columns: 1fr; }
+    .impact-grid { grid-template-columns: 1fr; }
+    .mission-banner { padding: 4rem 1.5rem; }
+    footer { padding: 2rem 1.5rem; flex-direction: column; text-align: center; }
+  }
+
+</style>
+</head>
+<body>
+
+<nav>
+  <a class="nav-logo" href="index.html">
+    <img src="/kere-logo.png" alt="Kéré Alliance">
+    <span>Kéré Alliance Foundation</span>
+  </a>
+  <ul class="nav-links">
+    <li><a href="index.html#about">About</a></li>
+    <li><a href="index.html#programs">Programs</a></li>
+    <li><a href="index.html#involved">Get Involved</a></li>
+    <li><a href="index.html#contact" class="nav-cta">Contact Us</a></li>
+  </ul>
+</nav>
+
+<div class="page-hero">
+  <div class="page-hero-bg"></div>
+  <div class="page-hero-content">
+    <div class="hero-tag">Program · Shelter &amp; Housing</div>
+    <h1>Safe refuge for the<br><em>homeless</em> and displaced</h1>
+    <p class="hero-verse">
+      "I was a stranger and you welcomed me."
+      <span>— Matthew 25:35</span>
+    </p>
+    <div class="hero-btns">
+      <a href="#projects" class="btn-primary">View Projects ↓</a>
+      <a href="index.html#contact" class="btn-secondary">Partner With Us</a>
+    </div>
+  </div>
+</div>
+
+<section class="projects" id="projects">
+  <div class="projects-header reveal">
+    <div class="section-tag" style="justify-content:center;">Our Projects</div>
+    <h2 class="section-title" style="text-align:center;">Where your gift <em>makes a difference</em></h2>
+    <p>Each project below addresses a specific need. Click Donate to support a project directly and make a real difference in someone's life.</p>
+  </div>
+  <div class="projects-grid">
+
+    <div class="program-card">
+      <div class="program-emoji">🏡</div>
+      <h3>Support for Children&#39;s Homes</h3>
+      <p>We partner with and support children's homes across Nigeria, providing resources, volunteers, and spiritual care to ensure orphaned and vulnerable children grow up in safe, loving environments.</p>
+      <ul class="program-items">
+        <li>Material support: food, clothing, bedding, and supplies</li>
+        <li>Volunteer visits and mentoring programmes</li>
+        <li>Spiritual care and Bible study for resident children</li>
+        <li>Infrastructure support for facilities in need</li>
+      </ul>
+      <button class="card-donate-btn" onclick="openModal('Support for Children's Homes')">&#10084; Donate to This Project</button>
+    </div>
+
+    <div class="program-card">
+      <div class="program-emoji">🆘</div>
+      <h3>Emergency Shelter Partnerships</h3>
+      <p>When disaster strikes — floods, fires, displacement — we mobilise quickly to connect affected people with emergency shelter. We partner with existing shelters and mobilise church facilities.</p>
+      <ul class="program-items">
+        <li>Rapid response shelter referrals and partnerships</li>
+        <li>Mobilisation of church buildings as emergency shelters</li>
+        <li>Relief packages for shelter residents</li>
+        <li>Follow-up care and transition support</li>
+      </ul>
+      <button class="card-donate-btn" onclick="openModal('Emergency Shelter Partnerships')">&#10084; Donate to This Project</button>
+    </div>
+
+    <div class="program-card">
+      <div class="program-emoji">🏘️</div>
+      <h3>Temporary Housing Assistance</h3>
+      <p>For individuals and families caught between crisis and stability, we provide short-term housing assistance and connect them with longer-term solutions and community support.</p>
+      <ul class="program-items">
+        <li>Short-term housing grants and referrals</li>
+        <li>Partnership with Christian housing initiatives</li>
+        <li>Case management and social support</li>
+        <li>Linkage to job training and economic empowerment</li>
+      </ul>
+      <button class="card-donate-btn" onclick="openModal('Temporary Housing Assistance')">&#10084; Donate to This Project</button>
+    </div>
+
+    <div class="program-card">
+      <div class="program-emoji">🌍</div>
+      <h3>Refugee &amp; Displaced Family Support</h3>
+      <p>Nigeria hosts a significant internally displaced population. We serve IDP communities with compassionate care — dignified shelter support, essential supplies, and the hope of the Gospel.</p>
+      <ul class="program-items">
+        <li>Regular outreach visits to IDP camps</li>
+        <li>Provision of essential household supplies</li>
+        <li>Legal and documentation assistance referrals</li>
+        <li>Spiritual care and community rebuilding activities</li>
+      </ul>
+      <button class="card-donate-btn" onclick="openModal('Refugee & Displaced Family Support')">&#10084; Donate to This Project</button>
+    </div>
+
+  </div>
+</section>
+
+<div class="mission-banner">
+  <blockquote>
+    "A roof is more than shelter — it is a declaration that <em>you are seen, you matter.</em>"
+  </blockquote>
+  <cite>— Shelter & Housing, Kéré Alliance Foundation</cite>
+</div>
+
+<section class="impact">
+  <div style="text-align:center; max-width:600px; margin:0 auto 1rem;">
+    <div class="section-tag reveal" style="justify-content:center;">Our Impact</div>
+    <h2 class="section-title reveal" style="text-align:center;">Love in <em>action</em></h2>
+  </div>
+  <div class="impact-grid">
+
+    <div class="impact-card reveal">
+      <div class="impact-num">4<span>+</span></div>
+      <div class="impact-label">Active Projects</div>
+    </div>
+    <div class="impact-card reveal reveal-delay-1">
+      <div class="impact-num">6<span>+</span></div>
+      <div class="impact-label">Partner Communities</div>
+    </div>
+    <div class="impact-card reveal reveal-delay-2">
+      <div class="impact-num">∞</div>
+      <div class="impact-label">Families Given Hope</div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="footer-logo">
+    <img src="/kere-logo.png" alt="Kéré">
+    <span>Kéré Alliance Foundation</span>
+  </div>
+  <div class="footer-motto">"Serving the least of Christ's brethren, both within and outside the fold."</div>
+  <div class="footer-copy">© 2025 Kéré Alliance Foundation<br>All rights reserved.</div>
+</footer>
+
+
+<div class="modal-overlay" id="donateModal">
+  <div class="modal">
+    <div class="modal-header">
+      <div>
+        <div class="modal-title">Make a Donation</div>
+        <div class="modal-subtitle" id="modalProjectName">Kéré Alliance Foundation</div>
+      </div>
+      <button class="modal-close" onclick="closeModal()">✕</button>
+    </div>
+    <div class="raised-bar">
+      <div class="raised-label">Raised so far</div>
+      <div class="raised-track"><div class="raised-fill"></div></div>
+      <div class="raised-num" id="raisedAmount">₦340,000 <span>of ₦1,000,000 goal</span></div>
+    </div>
+    <div class="amount-label">Select Amount (₦)</div>
+    <div class="amount-presets">
+      <button class="preset" onclick="selectPreset(this, '5000')">₦5,000</button>
+      <button class="preset active" onclick="selectPreset(this, '10000')">₦10,000</button>
+      <button class="preset" onclick="selectPreset(this, '25000')">₦25,000</button>
+      <button class="preset" onclick="selectPreset(this, '50000')">₦50,000</button>
+      <button class="preset" onclick="selectPreset(this, '100000')">₦100,000</button>
+      <button class="preset" onclick="selectPreset(this, '')">Custom</button>
+    </div>
+    <input class="custom-input" id="customAmount" type="number" placeholder="Enter custom amount (₦)" value="10000">
+    <div class="donor-fields">
+      <input class="donor-field" type="text" id="donorName" placeholder="Your Name">
+      <input class="donor-field" type="email" id="donorEmail" placeholder="Email Address">
+    </div>
+    <label class="anon-row">
+      <input type="checkbox" id="anonCheck">
+      <span>Donate anonymously</span>
+    </label>
+    <button class="modal-donate-btn" onclick="submitDonation()">Give Now →</button>
+    <p class="secure-note">🔒 Secure donation · Processed safely · Tax deductible</p>
+  </div>
+</div>
+
+
+<script>
+
+  const reveals = document.querySelectorAll('.reveal');
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+  }, { threshold: 0.12 });
+  reveals.forEach(el => observer.observe(el));
+
+  const nav = document.querySelector('nav');
+  window.addEventListener('scroll', () => {
+    nav.style.boxShadow = window.scrollY > 40 ? '0 2px 20px rgba(0,0,0,0.08)' : 'none';
+  });
+
+  let currentProject = '';
+  function openModal(project) {
+    currentProject = project;
+    document.getElementById('modalProjectName').textContent = project + ' — Kéré Alliance';
+    document.getElementById('donateModal').classList.add('open');
+    document.body.style.overflow = 'hidden';
+  }
+  function closeModal() {
+    document.getElementById('donateModal').classList.remove('open');
+    document.body.style.overflow = '';
+  }
+  document.getElementById('donateModal').addEventListener('click', function(e) {
+    if (e.target === this) closeModal();
+  });
+  function selectPreset(btn, val) {
+    document.querySelectorAll('.preset').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    if (val) document.getElementById('customAmount').value = val;
+    else { document.getElementById('customAmount').value = ''; document.getElementById('customAmount').focus(); }
+  }
+  function submitDonation() {
+    const amount = document.getElementById('customAmount').value;
+    const name = document.getElementById('donorName').value;
+    const anon = document.getElementById('anonCheck').checked;
+    if (!amount || isNaN(amount) || Number(amount) < 100) {
+      alert('Please enter a valid donation amount.'); return;
+    }
+    const formatted = new Intl.NumberFormat('en-NG').format(Number(amount));
+    const donor = anon ? 'Anonymous' : (name || 'Anonymous');
+    closeModal();
+    alert('Thank you' + (donor !== 'Anonymous' ? ', ' + donor : '') + '! Your gift of ₦' + formatted + ' to "' + currentProject + '" has been received. God bless you! 🙏');
+  }
+
+</script>
+</body>
+</html>
